@@ -20,7 +20,31 @@ router.get('/profile', authenticateUser, async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+// Route to create user profile
+router.post('/profile', authenticateUser, async (req, res) => {
+    const { bio, socialLinks, profilePicture } = req.body;
 
+    try {
+        // Check if profile already exists
+        let profile = await Profile.findOne({ userId: req.user._id });
+        if (profile) {
+            return res.status(400).json({ message: "Profile already exists" });
+        }
+
+        profile = new Profile({
+            userId: req.user._id,
+            bio: bio || '',
+            socialLinks: socialLinks || {},
+            profilePicture: profilePicture || ''
+        });
+
+        await profile.save();
+        res.status(201).json({ message: "Profile created successfully", profile });
+    } catch (error) {
+        console.error("Error creating profile:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 // Route to update user profile
 router.put('/profile', authenticateUser, checkPremium, async (req, res) => {
     const { bio, socialLinks, profilePicture } = req.body;
