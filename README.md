@@ -1,6 +1,8 @@
 # Vinktree
 
 A modern, beautiful link-in-bio SaaS platform built with **Next.js**, **Tailwind CSS**, and **Stripe**. Share all your links, grow your audience, and unlock premium features with a stunning, responsive UI.
+**Frontend is located at [`client/vinktree`](./client/vinktree)**
+**Backend is located at [`server`](./server)**
 
 ---
 
