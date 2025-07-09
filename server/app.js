@@ -7,10 +7,7 @@ const app = express();
 app.use(express.json());
 const cors = require('cors')
 
-app.use(cors({
-  origin: 'http://localhost:3000', // Allow requests from your Next.js frontend
-  credentials: true // if you plan to use cookies or auth tokens
-}))
+app.use(cors({ origin: true, credentials: true }));
 
 mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
